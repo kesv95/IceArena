@@ -38,9 +38,10 @@ kbd { display: inline-block; min-width: 22px; padding: 2px 5px; margin: 0 1px; b
 .status-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin: 16px 0; }
 .player-card { padding: 17px 20px; }
 .player-name { display: flex; align-items: center; gap: 8px; font-size: 12px; font-weight: 800; letter-spacing: .12em; }
+.selected-character-label { color: var(--ice); font-size: 11px; letter-spacing: 0; }
 .player-dot { display: inline-block; width: 10px; height: 10px; border-radius: 50%; }
 .p1-dot { background: var(--blue); box-shadow: 0 0 12px #54c8ff88; }
-.p2-dot { background: var(--pink); box-shadow: 0 0 12px #ff82b788; }
+.p2-dot { background: var(--blue); box-shadow: 0 0 12px #ff82b788; }
 .health-line { display: flex; justify-content: space-between; align-items: center; margin-top: 13px; color: var(--muted); font-size: 12px; }
 .health-line strong { color: #ff7c9c; letter-spacing: .12em; font-size: 17px; }
 .small-state { color: var(--ice); font-size: 12px; margin-top: 8px; min-height: 18px; }
@@ -52,9 +53,28 @@ kbd { display: inline-block; min-width: 22px; padding: 2px 5px; margin: 0 1px; b
 .game-toolbar strong { font-size: 13px; }
 .arena-wrap { position: relative; width: 100%; overflow: hidden; border-radius: 10px; border: 1px solid #304863; background: #0a1727; }
 canvas { display: block; width: 100%; height: auto; aspect-ratio: 16 / 9; }
-.overlay { position: absolute; inset: 0; display: grid; place-items: center; background: rgba(6, 14, 26, .7); backdrop-filter: blur(3px); }
+.overlay { position: absolute; inset: 0; display: grid; place-items: center; background: #060e1a; backdrop-filter: blur(3px); }
 .overlay.hidden { display: none; }
 .overlay-card { text-align: center; width: min(90%, 340px); padding: 26px; border: 1px solid #3b5878; border-radius: 18px; background: #13243a; box-shadow: 0 20px 60px #0006; }
+.character-lobby-card { width: min(94%, 900px); max-height: calc(100% - 20px); overflow-y: auto; padding: clamp(14px, 3vw, 26px); }
+.character-select-ui { margin: 16px 0 18px; }
+.character-select-ui.hidden { display: none; }
+.character-player-tabs { display: flex; justify-content: center; gap: 8px; }
+.picker-tab { border: 1px solid #3b5470; border-radius: 8px; padding: 8px 12px; color: var(--muted); background: #1b2e45; font-weight: 800; }
+.picker-tab.active { color: #fff; border-color: var(--blue); background: #174565; box-shadow: 0 0 14px #54c8ff22; }
+.picker-tab[data-player="2"].active { border-color: var(--pink); background: #502b43; box-shadow: 0 0 14px #ff82b722; }
+.character-select-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px; margin: 12px 0; }
+.character-option { min-width: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; padding: 9px 5px; border: 1px solid #344c68; border-radius: 10px; color: var(--text); background: #192a40; }
+.character-option:hover, .character-option:focus-visible { border-color: var(--ice); background: #213b57; outline: none; }
+.character-option.selected { border-color: var(--blue); box-shadow: inset 0 0 0 1px var(--blue); }
+.character-option.selected.player-two { border-color: var(--pink); box-shadow: inset 0 0 0 1px var(--pink); }
+.character-option[data-character-id="mystery"] { border-color: #c084fc; background: linear-gradient(145deg, #302346, #192a40); }
+.character-option[data-character-id="mystery"]:hover { border-color: #e9d5ff; background: #3b2b55; }
+.character-option-icon { font-size: 26px; line-height: 1.1; }
+.character-option-name { font-size: 11px; font-weight: 800; overflow-wrap: anywhere; }
+.character-trait-panel { min-height: 62px; padding: 10px 14px; border: 1px solid #344c68; border-radius: 10px; background: #0e1c2e; text-align: left; }
+.character-trait-title { margin: 0 0 4px; color: var(--ice); font-size: 13px; font-weight: 800; }
+.character-trait-description { margin: 0; color: var(--muted); font-size: 12px; line-height: 1.6; }
 .overlay-mark { font-size: 34px; color: var(--blue); }
 .overlay-card h2 { font-size: 23px; margin: 8px 0; }
 .overlay-card p { font-size: 13px; color: var(--muted); line-height: 1.7; margin: 0 0 20px; }
@@ -75,3 +95,8 @@ footer p { margin: 3px 0; }
   .player-card { padding: 14px; }
   .health-line strong { font-size: 14px; }
 }
+@media (max-width: 480px) {
+  .character-select-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .picker-tab { padding: 7px 8px; font-size: 11px; }
+}
+
